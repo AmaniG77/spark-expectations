@@ -185,19 +185,3 @@ YOUR_WEBHOOK_URL
     - Limit webhook permissions to specific channels
     - Monitor webhook usage in Slack app logs
 
-## Best Practices
-
-1. **Channel Strategy**: Use dedicated channels for data quality notifications
-2. **Message Frequency**: Configure appropriate trigger thresholds to avoid notification spam
-3. **Environment Separation**: Use different webhooks for different environments (dev, staging, prod)
-4. **Error Handling**: Monitor notification failures and implement fallback mechanisms
-5. **Testing**: Test notifications in development before deploying to production
-
-## Advanced Configuration
-
-For more complex notification scenarios, you can:
-
-- Combine Slack with email notifications for redundancy
-- Use different webhooks for different types of notifications
-- Implement custom message formatting through templates
-- Set up notification routing based on data quality severity levels
