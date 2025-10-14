@@ -146,23 +146,6 @@ Slack notifications sent by Spark Expectations include:
 - **Error Details**: Information about specific data quality issues
 - **Metadata**: Table name, environment, timestamp, and other contextual information
 
-## Troubleshooting
-
-### Common Issues
-
-1. **Webhook URL Invalid**
-   - Verify your webhook URL is correct and active
-   - Test the webhook URL directly using curl or Postman
-
-2. **Notifications Not Received**
-   - Check if `se_notifications_enable_slack` is set to `True`
-   - Ensure the appropriate trigger flags are enabled
-   - Verify network connectivity from your Spark environment
-
-3. **Permission Errors** 
-   - Ensure your Slack app has permission to post to the target channel
-   - Verify the webhook hasn't been revoked or expired
-
 ### Testing Slack Integration
 
 You can test your Slack webhook configuration using curl:
@@ -172,3 +155,4 @@ curl -X POST -H 'Content-type: application/json' \
 --data '{"text":"Test message from Spark Expectations"}' \
 YOUR_WEBHOOK_URL
 ```
+
