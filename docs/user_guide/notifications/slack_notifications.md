@@ -6,23 +6,26 @@ By default, Slack notifications are disabled. To enable them, you need to config
 
 ## Prerequisites
 
-Before configuring Slack notifications in Spark Expectations, you need to:
+Before configuring Slack notifications, you need:
 
-1. **Create a Slack App** in your workspace
-2. **Enable Incoming Webhooks** for your Slack app
-3. **Create a webhook URL** for the target channel
-4. **Copy the webhook URL** to use in your configuration
+### 1. Slack Webhook URL
 
-### Setting up Slack Webhook
+1. Go to [https://api.slack.com/apps](https://api.slack.com/apps) and create a new app
+2. Enable **"Incoming Webhooks"** and add one to your workspace
+3. Select your target channel (public, private, or direct message)
+4. Copy the generated webhook URL:
+   ```
+   https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX
+   ```
 
-1. Go to [Slack API](https://api.slack.com/apps) and create a new app
-2. Navigate to **Incoming Webhooks** in your app settings
-3. Turn on **Activate Incoming Webhooks**
-4. Click **Add New Webhook to Workspace**
-5. Select the channel where you want to receive notifications
-6. Copy the generated webhook URL (it looks like: `https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX`)
+!!! important "Security"
+    Store webhook URLs securely using environment variables - never commit them to code.
 
-## Configuration Parameters
+### 2. Network Access
+
+Your Spark environment needs HTTPS access to `hooks.slack.com` on port 443.
+
+## Notification Config Parameters
 
 ### Required Parameters
 
