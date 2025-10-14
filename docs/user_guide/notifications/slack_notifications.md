@@ -21,10 +21,6 @@ Before configuring Slack notifications, you need:
 !!! important "Security"
     Store webhook URLs securely using environment variables - never commit them to code.
 
-### 2. Network Access
-
-Your Spark environment needs HTTPS access to `hooks.slack.com` on port 443.
-
 ## Notification Config Parameters
 
 ### Required Parameters
@@ -176,12 +172,3 @@ curl -X POST -H 'Content-type: application/json' \
 --data '{"text":"Test message from Spark Expectations"}' \
 YOUR_WEBHOOK_URL
 ```
-
-## Security Considerations
-
-!!! warning "Webhook URL Security"
-    - Store webhook URLs securely (use environment variables or secret management)
-    - Rotate webhook URLs periodically
-    - Limit webhook permissions to specific channels
-    - Monitor webhook usage in Slack app logs
-
