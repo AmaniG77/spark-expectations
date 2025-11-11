@@ -2625,3 +2625,52 @@ def test_get_min_priority_zoom():
     context = SparkExpectationsContext(product_id="product1", spark=spark)
     context.set_min_priority_zoom("low")
     assert context.get_min_priority_zoom == "low"  # default value
+
+
+def test_set_kafka_write_status():
+    context = SparkExpectationsContext(product_id="product1", spark=spark)
+    context.set_kafka_write_status("Success")
+    assert context._kafka_write_status == "Success"
+    assert context.get_kafka_write_status == "Success"
+
+    context.set_kafka_write_status("Failed")
+    assert context._kafka_write_status == "Failed"
+    assert context.get_kafka_write_status == "Failed"
+
+
+def test_get_kafka_write_status():
+    context = SparkExpectationsContext(product_id="product1", spark=spark)
+    # Test default value
+    assert context.get_kafka_write_status == "Unknown"
+    
+    context.set_kafka_write_status("Disabled")
+    assert context.get_kafka_write_status == "Disabled"
+
+
+def test_set_kafka_write_error_message():
+    context = SparkExpectationsContext(product_id="product1", spark=spark)
+    error_message = "Failed to write to Kafka topic 'test-topic' on server 'localhost:9092'"
+    context.set_kafka_write_error_message(error_message)
+    assert context._kafka_write_error_message == error_message
+    assert context.get_kafka_write_error_message == error_message
+
+
+def test_get_kafka_write_error_message():
+    context = SparkExpectationsContext(product_id="product1", spark=spark)
+    # Test default value
+    assert context.get_kafka_write_error_message == ""
+    
+    error_message = "Kafka connection timeout"
+    context.set_kafka_write_error_message(error_message)
+    assert context.get_kafka_write_error_message == error_message
+
+
+def test_kafka_write_error_message_with_sensitive_data_masking():
+    context = SparkExpectationsContext(product_id="product1", spark=spark)
+    error_with_password = "Failed to authenticate with password=secret123 to kafka://server:9092"
+    context.set_kafka_write_error_message(error_with_password)
+    
+    # The sensitive data should be masked in the stored error message
+    stored_message = context.get_kafka_write_error_message
+    assert "secret123" not in stored_message
+    assert "password=***MASKED***" in stored_message
